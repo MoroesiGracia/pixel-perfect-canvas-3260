@@ -309,7 +309,7 @@ export function AppShell({
       </div>
 
       <Dialog open={searchOpen} onOpenChange={setSearchOpen}>
-        <DialogContent className="overflow-hidden p-0" showCloseButton={false}>
+        <DialogContent className="overflow-hidden p-0">
           <DialogTitle className="sr-only">Search the workspace</DialogTitle>
           <Command>
             <CommandInput placeholder="Search tasks, emails, meetings, clients…" />
