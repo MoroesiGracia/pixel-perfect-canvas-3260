@@ -1,4 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
+
+import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { Output, streamText } from "ai";
 import { z } from "zod";
 
@@ -28,6 +30,7 @@ const EmailSchema = z.object({
 });
 
 export const generateEmailDraft = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => EmailInput.parse(input))
   .handler(async ({ data }) => {
     const { provider } = createLovableResponsesProvider();
@@ -83,6 +86,7 @@ const SummarySchema = z.object({
 });
 
 export const summarizeMeetingNotes = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => SummaryInput.parse(input))
   .handler(async ({ data }) => {
     const { provider } = createLovableResponsesProvider();
@@ -143,6 +147,7 @@ const PlanSchema = z.object({
 });
 
 export const buildTaskPlan = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => PlanInput.parse(input))
   .handler(async ({ data }) => {
     const { provider } = createLovableResponsesProvider();
